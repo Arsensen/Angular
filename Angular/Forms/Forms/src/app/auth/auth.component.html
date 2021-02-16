@@ -1,0 +1,12 @@
+<div class="form">
+    <h1>Autorization</h1>
+    <form [formGroup]="formData" (ngSubmit)="signIn()">
+        <label><span>Email:</span> <input type="text" formControlName="email"></label>
+        <span *ngIf="formData.get('email').invalid && formData.get('email').touched" class="invalid"><small>Invalid email</small></span>
+        <label><span>Password:</span> <input type="password" formControlName="password"></label>
+        <span *ngIf="formData.get('password').invalid && formData.get('password').touched" class="invalid"><small>Password should include digit, uppercase and lowercase letters and more than 8 symbols</small></span>
+        <label><span>Confirm password:</span> <input type="password" formControlName="confirmedPassword"></label>
+        <span *ngIf="formData.get('confirmedPassword').invalid && formData.get('confirmedPassword').touched" class="invalid"><small>Password is not the same</small></span>
+        <button type="submit" >Sign in</button>
+    </form>
+</div>

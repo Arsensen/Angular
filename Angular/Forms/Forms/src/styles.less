@@ -1,0 +1,50 @@
+/* You can add global styles to this file, and also import other style files */
+
+.form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    form{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: space-between;
+        width: 30%;
+        border: 1px solid black;
+        padding: 2em;
+        &>span{
+            color: red;
+        }
+        label{
+            margin: 0.2em 0;
+            border-bottom: 1px solid green;
+            input{
+                float: right;
+            }
+        }
+        button{
+            width: fit-content;
+            margin: 1em auto;
+        }
+    }
+}
+
+.ng-invalid.ng-touched{
+    border: 1px solid red;
+}
+
+.ng-valid.ng-touched{
+    border: 1px solid green;
+}
+
+nav{
+    display: block;
+    margin: 0 auto;
+    width: fit-content;
+    *{
+        margin-right: 1em;
+        text-decoration: none;
+        color:green;
+    }
+}
