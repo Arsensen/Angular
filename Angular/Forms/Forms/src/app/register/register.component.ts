@@ -22,9 +22,8 @@ export class RegisterComponent implements OnInit {
     this.form.valueChanges.pipe(
       debounceTime(1500),
       distinctUntilChanged((prev, current)=>JSON.stringify(prev) === JSON.stringify(current))
-    ).subscribe((value)=>{
+    ).subscribe(()=>{
       this.form.reset({})
-      console.log(value)
     })
   }
 
