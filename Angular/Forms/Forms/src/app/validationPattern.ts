@@ -1,0 +1,1 @@
+export const UpperLowerDigit = /^(?=.*?[a-zа-я])(?=.*?[A-ZА-Я])(?=.*?[0-9])/

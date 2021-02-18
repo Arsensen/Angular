@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { RegistrationService } from '../registration.service';
-import validator from 'validator'
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Registration, RegisterFormBuilderObject } from './../formInputs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-register',
@@ -10,29 +10,22 @@ import validator from 'validator'
 })
 
 export class RegisterComponent implements OnInit {
-  formData: FormGroup
+  form: FormGroup
+  inputs = Registration
 
-  constructor(private registrationService: RegistrationService) { }
-
-  emailValidator(): (AbstractControl) => ValidationErrors | null {
-    return (control: AbstractControl): ValidationErrors | null => {
-      return validator.isEmail(control.value) ? null : { isMatching: false}
-    }
-  }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.formData = new FormGroup({
-      name: new FormControl('', [Validators.required, Validators.minLength(2)]),
-      surname: new FormControl('', [Validators.required, Validators.minLength(2)]),
-      email: new FormControl('', [Validators.required, this.emailValidator()]),
-      login: new FormControl('', [Validators.required]),
-      password: new FormControl(null, [Validators.required, Validators.minLength(8), Validators.pattern(/^(?=.*?[a-zа-я])(?=.*?[A-ZА-Я])(?=.*?[0-9])/)]),
-    })
-  }
+    this.form = this.fb.group(RegisterFormBuilderObject)
 
-  submit(): void {
-    if(this.formData.status === 'VALID'){
-      this.registrationService.saveForm(this.formData.value)
+    for(let input of this.inputs){
+      this.form.controls[input.name].valueChanges.pipe(
+        debounceTime(1500),
+        distinctUntilChanged(),
+      ).subscribe((value)=>{
+        this.form.reset({})
+        console.log(value)
+      })
     }
   }
 }

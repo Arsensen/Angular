@@ -1,12 +1,11 @@
 <div class="form">
     <h1>Autorization</h1>
-    <form [formGroup]="formData" (ngSubmit)="signIn()">
-        <label><span>Email:</span> <input type="text" formControlName="email"></label>
-        <span *ngIf="formData.get('email').invalid && formData.get('email').touched" class="invalid"><small>Invalid email</small></span>
-        <label><span>Password:</span> <input type="password" formControlName="password"></label>
-        <span *ngIf="formData.get('password').invalid && formData.get('password').touched" class="invalid"><small>Password should include digit, uppercase and lowercase letters and more than 8 symbols</small></span>
-        <label><span>Confirm password:</span> <input type="password" formControlName="confirmedPassword"></label>
-        <span *ngIf="formData.get('confirmedPassword').invalid && formData.get('confirmedPassword').touched" class="invalid"><small>Password is not the same</small></span>
-        <button type="submit" >Sign in</button>
+    <form [formGroup]="form">
+        <div *ngFor="let inp of inputs">
+            <label><span>{{inp.fieldName || inp.name}}:</span>  <input type={{inp.type}} formControlName={{inp.name}}></label>
+            <span *ngIf="form.get(inp.name).invalid && form.get(inp.name).touched" class="invalid"><small>{{inp.message}}</small></span>
+        </div>
+    <button type="submit" >Sign in</button>
+    <button type="reset" (click)="form.reset({})">Reset</button>
     </form>
 </div>

@@ -1,16 +1,11 @@
 <div class="form">
     <h1>Registration</h1>
-    <form [formGroup]="formData" (ngSubmit)="submit()">
-        <label><span>Name:</span>  <input type="text" formControlName="name"></label>
-        <span *ngIf="formData.get('name').invalid && formData.get('name').touched" class="invalid"><small>Name should be longer than 2 symbols</small></span>
-        <label><span>Surname:</span> <input type="text" formControlName="surname"></label>
-        <span *ngIf="formData.get('surname').invalid && formData.get('surname').touched" class="invalid"><small>Surname should be longer than 2 symbols</small></span>
-        <label><span>Login:</span> <input type="text" formControlName="login"></label>
-        <span *ngIf="formData.get('login').invalid && formData.get('login').touched" class="invalid"><small>Login is required</small></span>
-        <label><span>Email:</span> <input type="text" formControlName="email"></label>
-        <span *ngIf="formData.get('email').invalid && formData.get('email').touched" class="invalid"><small>Invalid email</small></span>
-        <label><span>Password:</span> <input type="password" formControlName="password"></label>
-        <span *ngIf="formData.get('password').invalid && formData.get('password').touched" class="invalid"><small>Password should include digit, uppercase and lowercase letters and more than 8 symbols</small></span>
+    <form [formGroup]="form">
+        <div *ngFor="let inp of inputs">
+            <label><span>{{inp.fieldName || inp.name}}:</span>  <input type={{inp.type}} formControlName={{inp.name}}></label>
+            <span *ngIf="form.get(inp.name).invalid && form.get(inp.name).touched" class="invalid"><small>{{inp.message}}</small></span>
+        </div>
         <button type="submit" >Save</button>
+        <button type="reset" (click)="form.reset()">Reset</button>
     </form>
 </div>

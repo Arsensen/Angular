@@ -1,7 +1,15 @@
-export interface Register{
+export interface Inputs{
     name: string;
-    surname: string;
-    login: string;
-    email: string;
-    password: string;
+    message: string;
+    type?: string;
+    fieldName?: string;
+}
+
+export interface fbObjects {
+    name?: any[];
+    surname?: any[];
+    login?: any[];
+    email: any[];
+    password: any[];
+    confirm?: any[];
 }
