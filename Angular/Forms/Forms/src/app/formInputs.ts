@@ -1,7 +1,7 @@
 import { Validators } from "@angular/forms";
 import { fbObjects, Inputs } from "./intrfaces";
 import { emailValidator, matchValues } from "./validationHandlers";
-import { UpperLowerDigit } from "./validationPattern";
+import { passwordRule } from "./validationPattern";
 
 export const Authorization: Inputs[] = [
     {name: 'email', message: 'Invalid email'},
@@ -22,12 +22,12 @@ export const RegisterFormBuilderObject: fbObjects = {
     surname: ['', [Validators.required, Validators.minLength(2)]],
     login: ['', [Validators.required]],
     email: ['', [Validators.required, emailValidator()]],
-    password: ['', [Validators.required, Validators.minLength(8), Validators.pattern(UpperLowerDigit)]]
+    password: ['', [Validators.required, Validators.minLength(8), Validators.pattern(passwordRule)]]
 }
 
 export const AuthFormBuilderObject: fbObjects = {
     email: ['', [Validators.required, emailValidator()]],
-    password: ['', [Validators.required, Validators.minLength(8), Validators.pattern(UpperLowerDigit)]],
+    password: ['', [Validators.required, Validators.minLength(8), Validators.pattern(passwordRule)]],
     confirm: ['', [Validators.required, matchValues('password')]]
 }
 

@@ -18,15 +18,18 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
     this.form = this.fb.group(RegisterFormBuilderObject)
 
-    for(let input of this.inputs){
-      this.form.controls[input.name].valueChanges.pipe(
-        debounceTime(1500),
-        distinctUntilChanged(),
-      ).subscribe((value)=>{
-        this.form.reset({})
-        console.log(value)
-      })
-    }
+
+    this.form.valueChanges.pipe(
+      debounceTime(1500),
+      distinctUntilChanged((prev, current)=>JSON.stringify(prev) === JSON.stringify(current))
+    ).subscribe((value)=>{
+      this.form.reset({})
+      console.log(value)
+    })
+  }
+
+  identify(index, item){
+    return item.name
   }
 }
 
