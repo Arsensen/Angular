@@ -1,0 +1,11 @@
+<div class="form">
+    <h1>Autorization</h1>
+    <form [formGroup]="form">
+        <div *ngFor="let inp of inputs; trackBy: identify">
+            <label><span>{{inp.fieldName || inp.name}}:</span>  <input type={{inp.type}} formControlName={{inp.name}}></label>
+            <span *ngIf="form.get(inp.name).invalid && form.get(inp.name).touched" class="invalid"><small>{{inp.message}}</small></span>
+        </div>
+    <button type="submit" >Sign in</button>
+    <button type="reset" (click)="form.reset({})">Reset</button>
+    </form>
+</div>
