@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Hero } from './selectedHero';
-import { HEROES } from './mock-heroes';
 import { Observable, of } from 'rxjs';
 import { MessagesService } from './messages.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +23,6 @@ export class HeroService {
   private log(message: string) {
       this.messagesService.add(`HeroService: ${message}`);
   }
- 
 
   constructor(private messagesService: MessagesService, private http: HttpClient) { }
 
@@ -69,7 +67,6 @@ export class HeroService {
 
   searchHeroes(term: string): Observable<Hero[]> {
     if (!term.trim()) {
-      // if not search term, return empty hero array.
       return of([]);
     }
     return this.http.get<Hero[]>(`${this.heroesUrl}/?name=${term}`).pipe(
