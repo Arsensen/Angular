@@ -1,0 +1,22 @@
+<div class="form">
+  <h1>Sign Up</h1>
+  <form [formGroup]="form">
+    <p *ngFor="let inp of inputs">
+      <mat-form-field appearance="fill">
+        <mat-label>Enter your {{ fieldName || inp.name }}</mat-label>
+        <input
+          matInput
+          type="{{ inp.type }}"
+          [formControl]="form.get(inp.name)"
+        />
+        <mat-error>{{ inp.message }}</mat-error>
+      </mat-form-field>
+    </p>
+    <div>
+      <button mat-raised-button color="primary" type="submit" (click)="save()">Save</button>
+      <button mat-raised-button type="reset" (click)="form.reset()">
+        Reset
+      </button>
+    </div>
+  </form>
+</div>

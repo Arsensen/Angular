@@ -1,0 +1,17 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.borders{
+    border: 1px solid green;
+}
+
+body > app-root > div > app-register > div > form > p:nth-child(1) > mat-form-field > div > div.mat-form-field-flex.ng-tns-c66-0 > div{
+    border-top: 0 solid transparent;
+}
+
+.mat-form-field-appearance-fill .mat-form-field-flex{
+    padding: 0 .75px 0 .75px !important;
+}
