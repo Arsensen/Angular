@@ -8,8 +8,8 @@ export interface Inputs{
 export interface fbObjects {
     name?: any[];
     surname?: any[];
-    login?: any[];
-    email: any[];
+    login: any[];
+    email?: any[];
     password: any[];
     confirm?: any[];
 }

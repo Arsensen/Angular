@@ -13,7 +13,14 @@
       </mat-form-field>
     </p>
     <div>
-      <button mat-raised-button color="primary" type="submit">Save</button>
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        (click)="signIn()"
+      >
+        Save
+      </button>
       <button mat-raised-button type="reset" (click)="form.reset()">
         Reset
       </button>

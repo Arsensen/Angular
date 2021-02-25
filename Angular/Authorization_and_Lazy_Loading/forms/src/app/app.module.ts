@@ -4,8 +4,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
-import { AuthModule } from './auth/auth.module';
-import { TaskModule } from './task/task.module';
+import { JwtModule } from '@auth0/angular-jwt';
+import { AuthGuard } from './auth/shared/auth.guard';
 
 @NgModule({
   declarations: [AppComponent],
@@ -14,10 +14,16 @@ import { TaskModule } from './task/task.module';
     BrowserAnimationsModule,
     AppRoutingModule,
     SharedModule,
-    AuthModule,
-    TaskModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: function () {
+          return localStorage.getItem('access_token'); //передает токен во все запросы?
+        },
+        allowedDomains: ['localhost:3000'],
+      },
+    }),
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

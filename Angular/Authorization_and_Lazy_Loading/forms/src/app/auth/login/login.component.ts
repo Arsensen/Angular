@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import {
   AuthFormBuilderObject,
   Authorization,
-} from '../../additional/formInputs';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+} from '../shared/formInputs';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -16,17 +16,17 @@ export class LoginComponent implements OnInit {
   form: FormGroup;
   inputs = Authorization;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private auth: AuthService) { }
 
   ngOnInit(): void {
     this.form = this.fb.group(AuthFormBuilderObject);
+  }
 
-    /* this.form.valueChanges.pipe(
-      debounceTime(4500),
-      distinctUntilChanged((prev, current)=>JSON.stringify(prev) === JSON.stringify(current))
-    ).subscribe((value)=>{
-      this.form.reset({})
-      console.log(value)
-    }) */
+  signIn() {
+    if (this.form.valid) {
+      this.auth.signIn(this.form.value).subscribe((value) => {
+        console.log('SAVED: ', value);
+      });
+    }
   }
 }
